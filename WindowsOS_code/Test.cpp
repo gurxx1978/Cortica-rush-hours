@@ -1,5 +1,5 @@
 /*
-*	© Superharmonic Technologies
+*	Â© Superharmonic Technologies
 *	Pavlos Sakoglou
 *
 *  ================================================
@@ -70,9 +70,9 @@ int main() {
 					if (requested_minutes[input_minutes] == true)
 						return true;
 					else
-						requested_minutes[input_minutes] == true
+						requested_minutes[input_minutes] = true
 				else
-					requested_hours[input_hours] == true
+					requested_hours[input_hours] = true
 
 			This would work without initialization, cause upon construction the unordered map will assume 
 			all key values to be false. You can confirm this by running the following snipped; having included
