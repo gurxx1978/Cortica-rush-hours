@@ -38,31 +38,31 @@ This application descirbes a query/insertion interface that allow client machine
 
 It would be a good idea to get the user input in the form of integer input that would describe the hours and minutes separately for the range. Thus, instead of having real numbers involved (which are meaningfuly uncountable) we could provide a method prototypes as follows:
 
-	      void AddTime(unsigned start_hour, unsigned start_min, unsigned end_hour, unsigned end_min)
-
-				void IsRushHour(unsigned hour, unsigned min)
+	void AddTime(unsigned start_hour, unsigned start_min, unsigned end_hour, unsigned end_min)
+	
+	void IsRushHour(unsigned hour, unsigned min)
 
 with restriction on the input as follows:
 
-				start_hour, end_hour in {0, ..., 24}
-				start_min, end_min in {0, ..., 60}
+	start_hour, end_hour in {0, ..., 24}
+	start_min, end_min in {0, ..., 60}
 
 This gives a total of 1,440 hour-minute combinations of querying, which is significantly less than 86,400. Additionally, in that case we could sacrifice some space a create a hash table using STL's std::unordered\_map which will hold all the past queried times, and the idea is that if a time is queried twice, the hash table will look up and return in O(1) average and O(log n) worst case, which won't affect the current performance which is O(n) worst case. The benefit is that often queries will now be O(1) and that would significantly improve performance in time.		
 
 Such an implementation will look like:
 
-				private:
-					std::unordered_map<long, bool> requested_minutes, requested_hours;
+	private:
+		std::unordered_map<long, bool> requested_minutes, requested_hours;
 
 and inside the query method we add:
 
-				if (requested_hours[input_hours] == true)
-					if (requested_minutes[input_minutes] == true)
-						return true;
-					else
-						requested_minutes[input_minutes] == true
-				else
-					requested_hours[input_hours] == true
+	if (requested_hours[input_hours] == true)
+		if (requested_minutes[input_minutes] == true)
+			return true;
+		else
+			requested_minutes[input_minutes] == true
+	else
+		requested_hours[input_hours] == true
 
 This would work without initialization, cause upon construction the unordered map will assume all key values to be false.
 
