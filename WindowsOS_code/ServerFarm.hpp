@@ -1,5 +1,5 @@
 /*
-*	© Superharmonic Technologies
+*	Â© Superharmonic Technologies
 *	Pavlos Sakoglou
 *
 *  ========================================================
@@ -112,7 +112,7 @@ public:
 		// Iterate the tuples to check for rush hour
 		// This is a C++11 range-based loop and is as efficient and optimized
 		// as the std::for_each algorithm
-		for (auto e : rush_hours) 
+		for (const auto &e : rush_hours) 
 			// In case the queried time is a rush hour
 				// 1) Release the lock
 				// 2) Notify waiting threads
