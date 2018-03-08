@@ -7,6 +7,9 @@
 #include <mutex>
 #include <condition_variable>
 #include <algorithm>
+
+using std::get;
+
 // * Data structure model: O(log n) insertion on average, O(n) worst case
 // * Query method: O(n) worst case
 class ServerFarm {
@@ -58,7 +61,7 @@ public:
 				// 1) Release the lock
 				// 2) Notify waiting threads
 				// 3) Return true
-			if (time >= std::get<0>(e) && time <= std::get<1>(e)) {
+			if (time >= get<0>(e) && time <= get<1>(e)) {
 				lock.unlock();
 				cv_query.notify_one();
 				return true;
